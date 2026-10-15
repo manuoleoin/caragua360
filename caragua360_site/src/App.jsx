@@ -1,24 +1,27 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
-import authRoutes from './routes/auth.routes.js';
-import profileRoutes from './routes/profile.routes.js';
-import contentRoutes from './routes/content.routes.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/home.jsx';
+import Explore from './pages/explore.jsx';
+import Header from './components/header.jsx';
+import Footer from './components/footer.jsx';
+import Login from './pages/login.jsx';
+import Cadastro from './pages/cadastro.jsx';
+import './App.css';
 
-const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') || true }));
-app.use(express.json());
-app.get('/health', (_req, res) => res.json({ status: 'online', service: 'caragua360' }));
-app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);
-app.use('/api', contentRoutes);
-app.use((_req, res) => res.status(404).json({ error: 'Rota não encontrada.' }));
 
 function App() {
   return (
-    <>
-    </>
-  )
+    <BrowserRouter>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
