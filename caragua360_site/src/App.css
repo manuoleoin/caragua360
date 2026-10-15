@@ -118,7 +118,7 @@ a {
     font-family: 'League Gothic', sans-serif;
     font-size: 110px;
     margin-bottom: 8px;
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 .cidade-texto h2 {
@@ -140,7 +140,7 @@ a {
 .cidade-imagem {
   display: block;
   width: 100%;
-  height: 700px;
+  height: 850px;
   min-height: 500px;
   object-fit: cover;
   border-radius: 25px;
@@ -184,6 +184,8 @@ a {
     text-align: left;
     font-size: 28px;
 }
+
+
 /* ===== SEÇÃO EXPERIÊNCIAS ===== */
 
 .experiencias {
