@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import './login.css';
 
@@ -14,7 +13,7 @@ function Login() {
         <h1>BEM VINDO NOVAMENTE!</h1>
 
         <div className="login-card">
-          <p>Login:</p>
+          <h2>Login:</h2>
 
           <form onSubmit={handleLogin}>
             <div className="login-campo">
@@ -23,6 +22,7 @@ function Login() {
                 type="email"
                 id="email"
                 name="email"
+                autoComplete="email"
                 required
               />
             </div>
@@ -33,19 +33,21 @@ function Login() {
                 type="password"
                 id="senha"
                 name="senha"
+                autoComplete="current-password"
                 required
               />
             </div>
 
             <div className="login-esqueci">
-              <Link to="/recuperar-senha">
-                esqueci a senha
-              </Link>
+              <Link to="/recuperar-senha">esqueci a senha</Link>
             </div>
 
+            <button type="submit" className="login-botao">
+              Entrar
+            </button>
+
             <p className="login-cadastro">
-              Não possui uma conta?{' '}
-              <Link to="/cadastro">Cadastrar</Link>
+              Não possui uma conta? <Link to="/cadastro">Cadastrar</Link>
             </p>
           </form>
         </div>
