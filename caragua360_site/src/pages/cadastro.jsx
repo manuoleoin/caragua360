@@ -1,22 +1,50 @@
+import { apiRequest } from '../auth/api.js';
+import { useAuth } from '../auth/AuthContext.jsx';
 
-import { Link } from 'react-router-dom';
 import './cadastro.css';
 
 function Cadastro() {
-    function validarSenhas(event) {
-        event.preventDefault();
+  const [nome, setNome] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [erro, setErro] = useState('');
+  const [enviando, setEnviando] = useState(false);
 
-        const formulario = event.currentTarget;
-        const senha = formulario.senha.value;
-        const confirmarSenha = formulario.confirmarSenha.value;
+  const { saveSession } = useAuth();
+  const navigate = useNavigate();
 
-        if (senha !== confirmarSenha) {
-            alert('As senhas não coincidem!');
-            return;
-        }
+  async function handleCadastro(event) {
+    event.preventDefault();
+    setErro('');
 
-        alert('Senhas confirmadas! O cadastro ainda precisa ser conectado ao sistema.');
+    if (senha !== confirmarSenha) {
+      setErro('As senhas não coincidem.');
+      return;
     }
+
+    setEnviando(true);
+
+    try {
+      const data = await apiRequest('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: nome.trim(),
+          username: usuario.trim(),
+          email: email.trim(),
+          password: senha,
+        }),
+      });
+
+      saveSession(data);
+      navigate('/perfil', { replace: true });
+    } catch (error) {
+      setErro(error.message);
+    } finally {
+      setEnviando(false);
+    }
+  }
 
     return (
         <main className="cadastro-pagina">

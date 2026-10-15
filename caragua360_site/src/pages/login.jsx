@@ -1,10 +1,52 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import { apiRequest } from '../auth/api.js';
+import { useAuth } from '../auth/AuthContext.jsx';
+
 import './login.css';
 
 function Login() {
-  function handleLogin(event) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
+  const [enviando, setEnviando] = useState(false);
+
+  const { user, saveSession, loading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/perfil', { replace: true });
+    }
+  }, [user, loading, navigate]);
+
+  async function handleLogin(event) {
     event.preventDefault();
-    // Aqui você poderá adicionar a validação do login depois.
+
+    setErro('');
+    setEnviando(true);
+
+    try {
+      const data = await apiRequest('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email.trim(),
+          password: senha,
+        }),
+      });
+
+      saveSession(data);
+
+      navigate(location.state?.from || '/perfil', {
+        replace: true,
+      });
+    } catch (error) {
+      setErro(error.message);
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (

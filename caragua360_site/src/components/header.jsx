@@ -22,7 +22,12 @@ function Header() {
                 <Link to="/preservacao">Preservação</Link>
                 <Link to="/roteiros">Roteiros</Link>
             </nav>
-             <Link to="/perfil" className='botao-perfil'>Perfil</Link>
+            <Link
+                to={user ? '/perfil' : '/login'}
+                className="botao-perfil">
+                {user ? 'Meu perfil' : 'Perfil'}
+            </Link>
+
         </header>
     );
 }

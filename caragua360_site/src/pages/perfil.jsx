@@ -1,13 +1,46 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import { apiRequest } from '../auth/api.js';
+import { useAuth } from '../auth/AuthContext.jsx';
+
 import './perfil.css';
 
 function Perfil() {
   const [abaAtiva, setAbaAtiva] = useState('roteiros');
+  const [erro, setErro] = useState('');
+  const [carregando, setCarregando] = useState(false);
 
-  function handleExcluirConta(event) {
-    event.preventDefault();
-    // Lógica para excluir conta
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleExcluirConta() {
+    const confirmou = window.confirm(
+      'Tem certeza de que deseja excluir sua conta? Essa ação não pode ser desfeita.'
+    );
+
+    if (!confirmou) return;
+
+    setErro('');
+    setCarregando(true);
+
+    try {
+      await apiRequest('/api/profile', {
+        method: 'DELETE',
+      });
+
+      logout();
+      navigate('/', { replace: true });
+    } catch (error) {
+      setErro(error.message);
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  function handleSair() {
+    logout();
+    navigate('/', { replace: true });
   }
 
   return (
