@@ -1,5 +1,7 @@
 import { apiRequest } from '../auth/api.jsx';
 import { useAuth } from '../auth/AuthContext.jsx';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import './cadastro.css';
 
@@ -54,7 +56,7 @@ function Cadastro() {
                 <div className="cadastro-card">
                     <p>Cadastre-se:</p>
 
-                    <form onSubmit={validarSenhas}>
+                    <form onSubmit={handleCadastro}>
                         <div className="cadastro-campo">
                             <label htmlFor="email">Email:</label>
                             <input

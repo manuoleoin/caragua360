@@ -14,3 +14,4 @@ export const pool = new Pool({
 pool.on('error', (error) => {
   console.error('Erro inesperado no MySQL Workbench:', error.message);
 });
+

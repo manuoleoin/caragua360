@@ -25,9 +25,15 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/perfil" element={<Perfil/>} />
-          <Route path="/preservacao" element={<Preservacao/>} />
-          </Routes>
+          <Route
+            path="/perfil"
+            element={
+              <ProtectedRoute>
+                <Perfil />
+              </ProtectedRoute>
+            }
+          />          <Route path="/preservacao" element={<Preservacao />} />
+        </Routes>
 
         <Footer />
       </AuthProvider>
