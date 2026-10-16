@@ -1,0 +1,187 @@
+
+/* CONFIGURAÇÕES GERAIS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #fffff3;
+}
+
+.explore-pagina {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: 30px;
+  background-color: #fffff3;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #163d70;
+}
+
+/* CABEÇALHO */
+.explore-cabecalho {
+  width: 100%;
+  min-height: 50px;
+  background-color: #062b60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 3%;
+  color: rgb(235, 198, 198);
+}
+
+/* TÍTULOS */
+.explore-interesses h2,
+.explore-secao h2 {
+  text-align: center;
+  color: #234c80;
+  font-size: 45px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* CATEGORIAS (QUAL SEU INTERESSE HOJE?) */
+.explore-interesses {
+  width: 100%;
+  padding: 15px 2%;
+}
+
+.explore-categorias {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 500px;
+  overflow-x: auto;
+}
+
+.explore-categorias a {
+  position: relative;
+  display: block;
+  flex: 1 0 18%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.explore-categorias img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.explore-categorias a:hover img {
+  filter: brightness(45%);
+}
+
+.explore-categorias span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+  color: #fff2b2;
+  font-size: 28px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.explore-categorias a:hover span {
+  opacity: 1;
+}
+
+/* SEÇÕES PADRONIZADAS (praias, pontos, atividades, onde comer, hospedagem) */
+.explore-secao {
+  width: 100%;
+  padding: 30px 3% 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-margin-top: 10px;
+}
+
+.explore-grade {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px 18px;
+  width: 85%;
+  margin-top: 15px;
+  justify-items: center;
+  align-content: center;
+}
+
+.explore-card {
+  width: 85%;
+  min-width: 0;
+  text-align: center;
+}
+
+.explore-card > img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  object-fit: cover;
+}
+
+.explore-card span {
+  display: block;
+  font-size: 15px;
+}
+
+/* TELAS MENORES */
+@media (max-width: 600px) {
+  .explore-interesses h2,
+  .explore-secao h2 {
+    font-size: 25px;
+  }
+
+  .explore-categorias {
+    height: 160px;
+    gap: 10px;
+  }
+
+  .explore-categorias a {
+    flex: 0 0 30%;
+  }
+
+  .explore-categorias span {
+    font-size: 14px;
+  }
+
+  .explore-secao {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .explore-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+    width: 100%;
+  }
+
+  .explore-card {
+    width: 100%;
+  }
+
+  .explore-card > img {
+    height: 140px;
+  }
+}
